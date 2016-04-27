@@ -1,0 +1,15 @@
+br/com/anteros/jsondoc/springmvc/scanner/AbstractSpringJSONDocScanner.class
+br/com/anteros/jsondoc/springmvc/scanner/builder/SpringProducesBuilder.class
+br/com/anteros/jsondoc/springmvc/scanner/builder/SpringPathVariableBuilder.class
+br/com/anteros/jsondoc/springmvc/scanner/Spring3JSONDocScanner.class
+br/com/anteros/jsondoc/springmvc/scanner/builder/SpringPathBuilder.class
+br/com/anteros/jsondoc/springmvc/scanner/Spring4JSONDocScanner.class
+br/com/anteros/jsondoc/springmvc/scanner/builder/SpringObjectBuilder.class
+br/com/anteros/jsondoc/springmvc/scanner/builder/SpringVerbBuilder.class
+br/com/anteros/jsondoc/springmvc/scanner/builder/SpringConsumesBuilder.class
+br/com/anteros/jsondoc/springmvc/scanner/builder/SpringRequestBodyBuilder.class
+br/com/anteros/jsondoc/springmvc/scanner/builder/SpringResponseBuilder.class
+br/com/anteros/jsondoc/springmvc/controller/JSONDocController.class
+br/com/anteros/jsondoc/springmvc/scanner/builder/SpringResponseStatusBuilder.class
+br/com/anteros/jsondoc/springmvc/scanner/builder/SpringHeaderBuilder.class
+br/com/anteros/jsondoc/springmvc/scanner/builder/SpringQueryParamBuilder.class

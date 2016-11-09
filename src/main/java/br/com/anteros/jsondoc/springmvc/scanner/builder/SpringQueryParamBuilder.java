@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ValueConstants;
 
-import br.com.anteros.jsondoc.core.annotation.DocApiQueryParam;
+import br.com.anteros.jsondoc.core.annotation.RestApiQueryParam;
 import br.com.anteros.jsondoc.core.pojo.ApiParamDoc;
 
 public class SpringQueryParamBuilder {
@@ -62,7 +62,7 @@ public class SpringQueryParamBuilder {
 		for (int i = 0; i < parametersAnnotations.length; i++) {
 			RequestParam requestParam = null;
 			ModelAttribute modelAttribute = null;
-			DocApiQueryParam apiQueryParam = null;
+			RestApiQueryParam apiQueryParam = null;
 			ApiParamDoc apiParamDoc = null;
 			
 			for (Annotation annotation : parametersAnnotations[i]) {
@@ -72,8 +72,8 @@ public class SpringQueryParamBuilder {
 				if(annotation instanceof ModelAttribute) {
 					modelAttribute = (ModelAttribute) annotation;
 				}
-				if (annotation instanceof DocApiQueryParam) {
-					apiQueryParam = (DocApiQueryParam) annotation;
+				if (annotation instanceof RestApiQueryParam) {
+					apiQueryParam = (RestApiQueryParam) annotation;
 				}
 				
 				if (requestParam != null) {
@@ -105,7 +105,7 @@ public class SpringQueryParamBuilder {
 	 * @param apiQueryParam
 	 * @param apiParamDoc
 	 */
-	private static void mergeApiQueryParamDoc(DocApiQueryParam apiQueryParam, ApiParamDoc apiParamDoc) {
+	private static void mergeApiQueryParamDoc(RestApiQueryParam apiQueryParam, ApiParamDoc apiParamDoc) {
 		if (apiQueryParam != null) {
 			if (apiParamDoc.getName().trim().isEmpty()) {
 				apiParamDoc.setName(apiQueryParam.name());

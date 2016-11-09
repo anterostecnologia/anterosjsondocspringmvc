@@ -14,7 +14,8 @@ import org.springframework.web.bind.annotation.RestController;
 import com.google.common.collect.Sets;
 
 import br.com.anteros.core.utils.ReflectionUtils;
-import br.com.anteros.jsondoc.core.annotation.DocApiMethod;
+import br.com.anteros.jsondoc.core.annotation.RestApiMethod;
+
 
 public class Spring4JSONDocScanner extends AbstractSpringJSONDocScanner {
 
@@ -30,7 +31,7 @@ public class Spring4JSONDocScanner extends AbstractSpringJSONDocScanner {
 		Set<Method> annotatedMethods = new LinkedHashSet<Method>();
 		Method[] allDeclaredMethods = ReflectionUtils.getAllDeclaredMethods(controller);
 		for (Method method : allDeclaredMethods) {
-			if (method.isAnnotationPresent(DocApiMethod.class) || method.isAnnotationPresent(RequestMapping.class)) {
+			if (method.isAnnotationPresent(RestApiMethod.class) || method.isAnnotationPresent(RequestMapping.class)) {
 				annotatedMethods.add(method);
 			}
 		}

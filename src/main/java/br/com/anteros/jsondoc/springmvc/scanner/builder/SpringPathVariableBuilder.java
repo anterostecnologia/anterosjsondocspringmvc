@@ -9,7 +9,7 @@ import org.jsondoc.core.util.JSONDocType;
 import org.jsondoc.core.util.JSONDocTypeBuilder;
 import org.springframework.web.bind.annotation.PathVariable;
 
-import br.com.anteros.jsondoc.core.annotation.DocApiPathParam;
+import br.com.anteros.jsondoc.core.annotation.RestApiPathParam;
 import br.com.anteros.jsondoc.core.pojo.ApiParamDoc;
 
 public class SpringPathVariableBuilder {
@@ -20,15 +20,15 @@ public class SpringPathVariableBuilder {
 		Annotation[][] parametersAnnotations = method.getParameterAnnotations();
 		for (int i = 0; i < parametersAnnotations.length; i++) {
 			PathVariable pathVariable = null;
-			DocApiPathParam apiPathParam = null;
+			RestApiPathParam apiPathParam = null;
 			ApiParamDoc apiParamDoc = null;
 
 			for (int j = 0; j < parametersAnnotations[i].length; j++) {
 				if (parametersAnnotations[i][j] instanceof PathVariable) {
 					pathVariable = (PathVariable) parametersAnnotations[i][j];
 				}
-				if (parametersAnnotations[i][j] instanceof DocApiPathParam) {
-					apiPathParam = (DocApiPathParam) parametersAnnotations[i][j];
+				if (parametersAnnotations[i][j] instanceof RestApiPathParam) {
+					apiPathParam = (RestApiPathParam) parametersAnnotations[i][j];
 				}
 
 				if (pathVariable != null) {
@@ -54,7 +54,7 @@ public class SpringPathVariableBuilder {
 	 * @param apiPathParam
 	 * @param apiParamDoc
 	 */
-	private static void mergeApiPathParamDoc(DocApiPathParam apiPathParam, ApiParamDoc apiParamDoc) {
+	private static void mergeApiPathParamDoc(RestApiPathParam apiPathParam, ApiParamDoc apiParamDoc) {
 		if (apiPathParam != null) {
 			if (apiParamDoc.getName().trim().isEmpty()) {
 				apiParamDoc.setName(apiPathParam.name());

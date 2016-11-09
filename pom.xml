@@ -53,7 +53,13 @@
 	</developers>
 
 
-	<dependencies>		
+	<dependencies>
+		<dependency>
+			<groupId>br.com.anteros</groupId>
+			<artifactId>Anteros-Core</artifactId>
+			<version>[1.0.0,)</version>
+		</dependency>
+
 		<dependency>
 			<groupId>br.com.anteros</groupId>
 			<artifactId>Anteros-JSONDoc-Core</artifactId>

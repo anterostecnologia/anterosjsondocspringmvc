@@ -21,9 +21,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.google.common.collect.Sets;
 
-import br.com.anteros.jsondoc.core.annotation.RestApi;
-import br.com.anteros.jsondoc.core.annotation.RestApiMethod;
-import br.com.anteros.jsondoc.core.annotation.RestApiObject;
+import br.com.anteros.core.utils.ReflectionUtils;
+import br.com.anteros.jsondoc.core.annotation.DocApi;
+import br.com.anteros.jsondoc.core.annotation.DocApiMethod;
+import br.com.anteros.jsondoc.core.annotation.DocApiObject;
 import br.com.anteros.jsondoc.core.annotation.flow.RestApiFlowSet;
 import br.com.anteros.jsondoc.core.annotation.global.RestApiChangelogSet;
 import br.com.anteros.jsondoc.core.annotation.global.RestApiGlobal;
@@ -103,7 +104,7 @@ public abstract class AbstractSpringJSONDocScanner extends AbstractJSONDocScanne
 					candidates.add((Class<?>) parametrizedType);
 				} else if (parametrizedType instanceof WildcardType) {
 					candidates.add(Void.class);
-				} else {
+				} else if (parametrizedType instanceof ParameterizedType) {
 					candidates.addAll(buildJSONDocObjectsCandidates(candidates, (Class<?>) ((ParameterizedType) parametrizedType).getRawType(), parametrizedType));
 				}
 			} else if (type instanceof GenericArrayType) {
@@ -140,7 +141,7 @@ public abstract class AbstractSpringJSONDocScanner extends AbstractJSONDocScanne
 		return candidates;
 	}
 
-	private void appendSubCandidates(Class<?> clazz, Set<Class<?>> subCandidates) {
+	protected void appendSubCandidates(Class<?> clazz, Set<Class<?>> subCandidates) {
 		if(clazz.isPrimitive() || clazz.equals(Class.class)) {
 			return;
 		}
@@ -251,7 +252,7 @@ public abstract class AbstractSpringJSONDocScanner extends AbstractJSONDocScanne
 
 	@Override
 	public ApiMethodDoc mergeApiMethodDoc(Method method, ApiMethodDoc apiMethodDoc) {
-		if (method.isAnnotationPresent(RestApiMethod.class) && method.getDeclaringClass().isAnnotationPresent(RestApi.class)) {
+		if (method.isAnnotationPresent(DocApiMethod.class) && method.getDeclaringClass().isAnnotationPresent(DocApi.class)) {
 			ApiMethodDoc jsondocApiMethodDoc = JSONDocApiMethodDocBuilder.build(method);
 			BeanUtils.copyProperties(jsondocApiMethodDoc, apiMethodDoc, new String[] { "path", "verb", "produces", "consumes", "headers", "pathparameters", "queryparameters", "bodyobject", "response", "responsestatuscode", "apierrors", "supportedversions", "auth", "displayMethodAs" });
 		}
@@ -265,7 +266,7 @@ public abstract class AbstractSpringJSONDocScanner extends AbstractJSONDocScanne
 
 	@Override
 	public ApiObjectDoc mergeApiObjectDoc(Class<?> clazz, ApiObjectDoc apiObjectDoc) {
-		if(clazz.isAnnotationPresent(RestApiObject.class)) {
+		if(clazz.isAnnotationPresent(DocApiObject.class)) {
 			ApiObjectDoc jsondocApiObjectDoc = JSONDocApiObjectDocBuilder.build(clazz);
 			BeanUtils.copyProperties(jsondocApiObjectDoc, apiObjectDoc);
 		}
